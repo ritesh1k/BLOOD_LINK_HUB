@@ -77,8 +77,11 @@ header {
 /* ===== HERO SECTION ===== */
 .hero {
   position: relative;
-  background: url('hero-banner.jpg') no-repeat center center;
+  background-image: url('hero-banner.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
   background-size: cover;
+  background-attachment: scroll;
   width: 100%;
   max-width: 1200px;
   min-height: 400px;
@@ -476,11 +479,15 @@ footer {
   }
 
   .hero {
+    background-size: cover;
+    background-position: center center;
     margin: 0;
+    padding: 0;
     min-height: 380px;
     border-radius: 0;
     width: 100%;
     max-width: none;
+    box-shadow: none;
   }
 
   .hero .overlay {
@@ -554,11 +561,15 @@ footer {
 
 @media (max-width: 500px) {
   .hero {
+    background-size: cover;
+    background-position: center center;
     min-height: 360px;
     margin: 0;
+    padding: 0;
     width: 100%;
     max-width: none;
     border-radius: 0;
+    box-shadow: none;
   }
 
   .hero-content {
@@ -667,11 +678,15 @@ footer {
   }
 
   .hero {
+    background-size: cover;
+    background-position: center center;
     min-height: 340px;
     margin: 0;
+    padding: 0;
     border-radius: 0;
     width: 100%;
     max-width: none;
+    box-shadow: none;
   }
 
   .hero-content {
