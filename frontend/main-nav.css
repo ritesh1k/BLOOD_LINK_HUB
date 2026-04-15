@@ -84,6 +84,8 @@
   .main-nav .main-nav-container {
     width: 95%;
     padding: 8px 0;
+    flex-wrap: wrap;
+    gap: 0;
   }
 
   .main-nav .main-nav-brand {
@@ -104,7 +106,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    order: 2;
+    margin-left: auto;
   }
 
   .main-nav .main-nav-links {
@@ -117,7 +119,6 @@
     overflow: hidden;
     opacity: 0;
     transition: max-height 0.3s ease, opacity 0.3s ease;
-    order: 3;
   }
 
   .main-nav .main-nav-links.is-open {
