@@ -35,7 +35,11 @@
     '<header class="main-nav">' +
     '  <div class="main-nav-container">' +
     '    <a class="main-nav-brand" href="index.html"><img src="logo.avif" alt="BloodLink Hub Logo"><span>BloodLink Hub</span></a>' +
-    '    <button class="main-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false"><span class="hamburger-icon"></span></button>' +
+    '    <button class="main-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">' +
+    '      <span class="hamburger-line"></span>' +
+    '      <span class="hamburger-line"></span>' +
+    '      <span class="hamburger-line"></span>' +
+    '    </button>' +
     '    <ul class="main-nav-links">' + linksHtml + '</ul>' +
     '  </div>' +
     '</header>';
