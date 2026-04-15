@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Signup</title>
+    <link rel="stylesheet" href="auth-pages.css">
+    <link rel="stylesheet" href="main-nav.css">
+    <script defer src="main-nav.js"></script>
+</head>
+<body class="auth-page donor-signup-bg">
+    <div id="main-nav-root"></div>
+    <div class="container">
+        <h2>Donor Signup</h2>
+        <form id="signupForm">
+            <input type="text" id="name" name="name" autocomplete="name" placeholder="Full Name" required>
+            <input type="email" id="email" name="email" autocomplete="email" placeholder="Email" required>
+            <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="Phone Number" required>
+            <input type="password" id="password" name="password" autocomplete="new-password" placeholder="Password" required>
+            <select id="bloodGroup" required>
+                <option value="">Select Blood Type</option>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+            </select>
+            <button type="submit">Sign Up</button>
+        </form>
+        <p class="auth-note">Already have an account? <a href="donor_login.html">Login here</a></p>
+    </div>
+
+    <script src="../api.js"></script>
+
+    <script>
+        document.getElementById("signupForm").onsubmit = async function(event) {
+            event.preventDefault();
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim().toLowerCase();
+            const phone = document.getElementById("phone").value.trim();
+            const password = document.getElementById("password").value;
+            const bloodGroup = document.getElementById("bloodGroup").value;
+
+            if (!name || !email || !phone || !password || !bloodGroup) {
+                alert("Please fill in all fields!");
+                return;
+            }
+
+            try {
+                await registerUser({
+                    name,
+                    email,
+                    phone,
+                    password,
+                    blood_group: bloodGroup,
+                    role: "donor"
+                });
+
+                alert("Signup successful! Please login.");
+                window.location.href = "donor_login.html";
+            } catch (error) {
+                alert(error.message || "Signup failed.");
+            }
+        };
+    </script>
+</body>
+</html>
+
+

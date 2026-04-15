@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Donation Eligibility Checker</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://source.unsplash.com/1600x900/?blood,donation') no-repeat center center/cover;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            width: 100%;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        #main-nav-root {
+            width: 100%;
+        }
+
+        /* Container */
+        .container {
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 10px;
+            width: 92%;
+            margin: 50px auto;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out;
+        }
+        .container:hover {
+            transform: scale(1.02);
+        }
+
+        /* Title */
+        h2 {
+            color: #e43f3a;
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        /* Input Groups */
+        .input-group {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 10px;
+            padding: 10px;
+            background: white;
+            transition: box-shadow 0.3s ease-in-out;
+        }
+        .input-group:hover {
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Icons */
+        .input-group i {
+            font-size: 18px;
+            margin-right: 10px;
+            color: #888;
+            transition: color 0.3s ease;
+        }
+        .input-group:hover i {
+            color: #e43f3a;
+        }
+
+        /* Inputs */
+        input, select {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            background: transparent;
+        }
+
+        /* Button */
+        button {
+            background-color: #e43f3a;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+        button:hover {
+            background-color: #c9322f;
+            transform: scale(1.05);
+        }
+
+        /* Result */
+        .result {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+    <link rel="stylesheet" href="main-nav.css">
+    <script defer src="main-nav.js"></script>
+</head>
+<body>
+    <div id="main-nav-root"></div>
+
+<div class="container">
+    <h2>Blood Donation Eligibility Checker</h2>
+
+    <div class="input-group">
+        <i class="fas fa-user"></i>
+        <input type="number" id="age" min="1" placeholder="Enter your age" required>
+    </div>
+
+    <div class="input-group">
+        <i class="fas fa-weight"></i>
+        <input type="number" id="weight" min="1" placeholder="Enter your weight (kg)" required>
+    </div>
+
+    <div class="input-group">
+        <i class="fas fa-venus-mars"></i>
+        <select id="gender">
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+    </div>
+
+    <div class="input-group">
+        <i class="fas fa-tint"></i>
+        <input type="number" id="hemoglobin" step="0.1" placeholder="Enter hemoglobin level (g/dL)" required>
+    </div>
+
+    <div class="input-group">
+        <i class="fas fa-thermometer-three-quarters"></i>
+        <select id="fever">
+         <option>Fever</option>
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+        </select>
+    </div>
+
+    <div class="input-group">
+        <i class="fas fa-tattoo"></i>
+        <select id="tattoo">
+            <option>Tattoo</option>
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+        </select>
+    </div>
+
+    <div class="input-group">
+        <i class="fas fa-virus"></i>
+        <select id="disease">
+            <option>Disease</option>
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+        </select>
+    </div>
+
+    <div class="input-group">
+        <i class="fas fa-calendar-alt"></i>
+        <input type="number" id="last-donation" min="0" placeholder="Days since last donation" required>
+    </div>
+
+    <button id="checkEligibilityBtn" type="button">Check Eligibility</button>
+
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+function checkEligibility(event) {
+    if (event && typeof event.preventDefault === "function") {
+        event.preventDefault();
+    }
+
+    let age = document.getElementById("age").value;
+    let weight = document.getElementById("weight").value;
+    let gender = document.getElementById("gender").value;
+    let hemoglobin = document.getElementById("hemoglobin").value;
+    let fever = document.getElementById("fever").value;
+    let tattoo = document.getElementById("tattoo").value;
+    let disease = document.getElementById("disease").value;
+    let lastDonation = document.getElementById("last-donation").value;
+    let result = document.getElementById("result");
+
+    // Convert values to correct types
+    age = parseInt(age);
+    weight = parseFloat(weight);
+    hemoglobin = parseFloat(hemoglobin);
+    lastDonation = parseInt(lastDonation);
+
+    // Validation checks
+    if (age < 18 || age > 65) {
+        result.innerHTML = "❌ You must be between 18 and 65 years old.";
+        result.style.color = "red";
+        return;
+    }
+    if (weight < 50) {
+        result.innerHTML = "❌ You must weigh at least 50 kg.";
+        result.style.color = "red";
+        return;
+    }
+    if (hemoglobin < 12 || hemoglobin > 17) {
+        result.innerHTML = "❌ Your hemoglobin level must be between 12 and 17 g/dL.";
+        result.style.color = "red";
+        return;
+    }
+    if (fever === "Yes") {
+        result.innerHTML = "❌ You cannot donate if you have fever, cold, or flu.";
+        result.style.color = "red";
+        return;
+    }
+    if (tattoo === "Yes") {
+        result.innerHTML = "❌ You must wait 6 months after a tattoo/piercing.";
+        result.style.color = "red";
+        return;
+    }
+    if (disease === "Yes") {
+        result.innerHTML = "❌ You are not eligible due to infectious disease history.";
+        result.style.color = "red";
+        return;
+    }
+    if (lastDonation < 56) {
+        result.innerHTML = "❌ You must wait at least 56 days between donations.";
+        result.style.color = "red";
+        return;
+    }
+
+    // If all checks pass
+    result.innerHTML = "✅ Congratulations! You are eligible to donate blood. Thank you for your willingness to save lives!";
+    result.style.color = "green";
+}
+
+document.getElementById("checkEligibilityBtn").addEventListener("click", checkEligibility);
+</script>
+
+</body>
+</html>

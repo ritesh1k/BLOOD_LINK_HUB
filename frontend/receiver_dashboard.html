@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receiver Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 92%;
+            max-width: 980px;
+            margin: 30px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+        h2 {
+            text-align: center;
+            color: #d32f2f;
+        }
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .welcome {
+            font-size: 15px;
+            color: #333;
+            margin: 0;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: vertical;
+            min-height: 90px;
+        }
+        button {
+            background: #d32f2f;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #b71c1c;
+        }
+        .logout-btn {
+            width: auto;
+            margin: 0;
+            background: #555;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+        .logout-btn:hover {
+            background: #333;
+        }
+        .section-title {
+            color: #d32f2f;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+        .form-grid {
+            display: grid;
+            gap: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background: #d32f2f;
+            color: white;
+        }
+        .badge {
+            border-radius: 999px;
+            display: inline-block;
+            padding: 3px 8px;
+            font-size: 12px;
+            font-weight: bold;
+            color: #fff;
+        }
+        .badge-pending { background: #ef6c00; }
+        .badge-accepted { background: #2e7d32; }
+        .muted {
+            color: #666;
+            font-size: 13px;
+        }
+        .secondary-btn {
+            background: #455a64;
+            color: #fff;
+            border: none;
+            padding: 7px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .secondary-btn:hover {
+            background: #263238;
+        }
+    </style>
+    <link rel="stylesheet" href="main-nav.css">
+    <script defer src="main-nav.js"></script>
+</head>
+<body>
+    <div id="main-nav-root"></div>
+
+    <div class="container">
+        <div class="top-bar">
+            <p class="welcome" id="welcomeText"></p>
+            <button type="button" class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+        <p class="muted" id="userDetails"></p>
+        <h2>Request Blood</h2>
+        <form id="requestForm">
+            <h3 class="section-title">Blood Requirement</h3>
+            <div class="form-grid">
+                <input type="text" id="patientName" placeholder="Patient Name" required>
+                <input type="number" id="patientAge" min="0" max="120" placeholder="Patient Age">
+                <select id="patientGender">
+                    <option value="">Patient Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+                <select id="bloodType" required>
+                    <option value="">Required Blood Group</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                </select>
+                <input type="number" id="quantity" min="1" value="1" placeholder="Units Required" required>
+                <input type="date" id="requiredByDate" placeholder="Required By Date">
+            </div>
+
+            <h3 class="section-title">Contact And Address</h3>
+            <div class="form-grid">
+                <input type="text" id="contactName" placeholder="Primary Contact Name" required>
+                <input type="text" id="contactPhone" placeholder="Primary Contact Number" required>
+                <input type="text" id="altContactPhone" placeholder="Alternate Contact Number">
+                <input type="text" id="addressLine1" placeholder="Address Line 1" required>
+                <input type="text" id="addressLine2" placeholder="Address Line 2">
+                <input type="text" id="city" placeholder="City" required>
+                <input type="text" id="district" placeholder="District">
+                <input type="text" id="state" placeholder="State" required>
+                <input type="text" id="pincode" placeholder="Pincode" required>
+            </div>
+
+            <h3 class="section-title">Hospital And Health Info</h3>
+            <div class="form-grid">
+                <input type="text" id="hospital" placeholder="Hospital Name" required>
+                <input type="text" id="doctorName" placeholder="Doctor Name">
+                <input type="text" id="medicalCondition" placeholder="Medical Condition (e.g. Surgery, Accident)">
+            </div>
+            <textarea id="healthNotes" placeholder="Extra health details for donor (allergy, urgency notes, current treatment, etc.)"></textarea>
+
+            <button type="submit">Submit Request</button>
+        </form>
+
+        <h3 class="section-title">My Requests</h3>
+        <p class="muted">When a donor accepts your request, donor details will appear here.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Blood</th>
+                    <th>Units</th>
+                    <th>Hospital</th>
+                    <th>Status</th>
+                    <th>Accepted Donor</th>
+                </tr>
+            </thead>
+            <tbody id="myRequestsTable">
+                <tr><td colspan="6">No requests found.</td></tr>
+            </tbody>
+        </table>
+
+        <h3 class="section-title">Available Matching Donors</h3>
+        <p class="muted">If donors are already available for the selected blood group, you can directly connect with them here.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Blood Group</th>
+                    <th>Contact</th>
+                    <th>Location</th>
+                    <th>Health And Availability</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="availableDonorsTable">
+                <tr><td colspan="6">Loading donors...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="../api.js"></script>
+
+    <script>
+        function normalizeRole(role) {
+            const value = String(role || "").trim().toLowerCase();
+            if (value === "donor") return "donor";
+            if (value === "receiver" || value === "recipient" || value === "receipent") return "receiver";
+            return null;
+        }
+
+        function dashboardRouteByRole(role) {
+            return role === "donor" ? "donor_dashboard.html" : "receiver_dashboard.html";
+        }
+
+        function loginRouteByRole(role) {
+            return role === "donor" ? "donor_login.html" : "receiver_login.html";
+        }
+
+        function initReceiverDashboard() {
+            const currentUser = JSON.parse(localStorage.getItem("currentUser") || "null");
+            const token = localStorage.getItem("token");
+
+            if (!currentUser || !token) {
+                alert("Please login first.");
+                window.location.href = "receiver_login.html";
+                return null;
+            }
+
+            const normalizedRole = normalizeRole(currentUser.role);
+            if (normalizedRole !== "receiver") {
+                alert("You are not allowed to open receiver dashboard.");
+                if (normalizedRole === "donor") {
+                    window.location.href = dashboardRouteByRole(normalizedRole);
+                } else {
+                    window.location.href = "receiver_login.html";
+                }
+                return null;
+            }
+
+            document.getElementById("welcomeText").textContent = `Welcome, ${currentUser.name}`;
+            document.getElementById("userDetails").textContent = `Email: ${currentUser.email || "-"} | Phone: ${currentUser.phone || "-"} | Blood Group: ${currentUser.bloodGroup || "-"}`;
+            return currentUser;
+        }
+
+        function logout() {
+            localStorage.removeItem("currentUser");
+            localStorage.removeItem("token");
+            window.location.href = "receiver_login.html";
+        }
+
+        const loggedInReceiver = initReceiverDashboard();
+
+        function getConnectionStorageKey() {
+            const currentUser = JSON.parse(localStorage.getItem("currentUser") || "null");
+            const uniqueId = currentUser && (currentUser.id || currentUser.userId || currentUser.email) ? (currentUser.id || currentUser.userId || currentUser.email) : "guest";
+            return `receiverConnections_${uniqueId}`;
+        }
+
+        function loadConnectionState() {
+            try {
+                return JSON.parse(localStorage.getItem(getConnectionStorageKey()) || "{}");
+            } catch (_) {
+                return {};
+            }
+        }
+
+        function saveConnectionState(state) {
+            localStorage.setItem(getConnectionStorageKey(), JSON.stringify(state || {}));
+        }
+
+        let connectedStateByDonor = loadConnectionState();
+
+        async function loadMyRequests() {
+            const tableBody = document.getElementById("myRequestsTable");
+
+            try {
+                const rows = await myRequests();
+                if (!Array.isArray(rows) || !rows.length) {
+                    tableBody.innerHTML = '<tr><td colspan="6">No requests found.</td></tr>';
+                    return;
+                }
+
+                tableBody.innerHTML = rows.map((item) => {
+                    const accepted = item.accepted_donor_id ? true : false;
+                    const badgeClass = accepted ? "badge badge-accepted" : "badge badge-pending";
+                    const badgeText = accepted ? "Accepted" : "Pending";
+                    const donorInfo = accepted
+                        ? `${item.accepted_donor_name || "Donor"}<br>${item.accepted_donor_email || ""}<br>${item.accepted_donor_phone || ""}`
+                        : "-";
+
+                    return `
+                        <tr>
+                            <td>${new Date(item.request_date).toLocaleString()}</td>
+                            <td>${item.blood_group}</td>
+                            <td>${item.quantity}</td>
+                            <td>${item.hospital_name || '-'}</td>
+                            <td><span class="${badgeClass}">${badgeText}</span></td>
+                            <td>${donorInfo}</td>
+                        </tr>
+                    `;
+                }).join("");
+            } catch (error) {
+                tableBody.innerHTML = `<tr><td colspan="6">${error.message || 'Failed to load requests.'}</td></tr>`;
+            }
+        }
+
+        async function loadAvailableDonors(bloodGroupOverride) {
+            const tableBody = document.getElementById("availableDonorsTable");
+            const selectedBloodGroup = (bloodGroupOverride || document.getElementById("bloodType").value || "").trim();
+
+            if (!selectedBloodGroup) {
+                tableBody.innerHTML = '<tr><td colspan="6">Select blood group to see available donors.</td></tr>';
+                return;
+            }
+
+            tableBody.innerHTML = '<tr><td colspan="6">Loading donors...</td></tr>';
+
+            try {
+                const donors = await listAvailableDonorsForReceiver({ blood_group: selectedBloodGroup, limit: 50 });
+                if (!Array.isArray(donors) || !donors.length) {
+                    tableBody.innerHTML = '<tr><td colspan="6">No available donor found for selected blood group.</td></tr>';
+                    return;
+                }
+
+                tableBody.innerHTML = donors.map((donor) => {
+                    const donorId = Number(donor.id);
+                    const connectState = connectedStateByDonor[donorId] || null;
+                    const contact = `${donor.phone || '-'}<br>${donor.email || '-'}`;
+                    const location = [
+                        donor.address_line1 || '',
+                        donor.address_line2 || '',
+                        donor.city || '',
+                        donor.district || '',
+                        donor.state || '',
+                        donor.pincode || ''
+                    ].filter(Boolean).join(', ') || '-';
+                    const health = [
+                        donor.last_donation_date ? `Last Donation: ${new Date(donor.last_donation_date).toLocaleDateString()}` : null,
+                        donor.weight_kg ? `Weight: ${donor.weight_kg} kg` : null,
+                        donor.preferred_donation_center ? `Center: ${donor.preferred_donation_center}` : null,
+                        donor.medical_notes ? `Notes: ${donor.medical_notes}` : null
+                    ].filter(Boolean).join('<br>') || 'Available';
+
+                    let actionHtml = `<button type="button" class="secondary-btn" onclick="connectToDonor(${donorId})">Connect</button>`;
+                    if (connectState === 'connecting') {
+                        actionHtml = '<button type="button" class="secondary-btn" disabled>Connecting...</button>';
+                    } else if (connectState === 'connected') {
+                        actionHtml = '<span class="badge badge-accepted">Connected</span>';
+                    }
+
+                    return `
+                        <tr>
+                            <td>${donor.name || '-'}</td>
+                            <td>${donor.blood_group || '-'}</td>
+                            <td>${contact}</td>
+                            <td>${location}</td>
+                            <td>${health}</td>
+                            <td>${actionHtml}</td>
+                        </tr>
+                    `;
+                }).join('');
+            } catch (error) {
+                tableBody.innerHTML = `<tr><td colspan="6">${error.message || 'Failed to load donor list.'}</td></tr>`;
+            }
+        }
+
+        async function connectToDonor(donorId) {
+            if (connectedStateByDonor[donorId] === 'connecting' || connectedStateByDonor[donorId] === 'connected') {
+                return;
+            }
+
+            const message = prompt('Write a short message for donor (optional):', 'Please help with urgent blood requirement.');
+            if (message === null) return;
+
+            const payload = {
+                blood_group: document.getElementById('bloodType').value || null,
+                quantity: document.getElementById('quantity').value ? Number(document.getElementById('quantity').value) : null,
+                hospital_name: document.getElementById('hospital').value.trim() || null,
+                city: document.getElementById('city').value.trim() || null,
+                message: String(message || '').trim()
+            };
+
+            try {
+                connectedStateByDonor[donorId] = 'connecting';
+                saveConnectionState(connectedStateByDonor);
+                loadAvailableDonors(document.getElementById('bloodType').value);
+
+                await connectWithDonor(donorId, payload);
+                setTimeout(function () {
+                    connectedStateByDonor[donorId] = 'connected';
+                    saveConnectionState(connectedStateByDonor);
+                    loadAvailableDonors(document.getElementById('bloodType').value);
+                }, 1500);
+
+                alert('Connect request sent to donor successfully. Status will change to Connected shortly.');
+            } catch (error) {
+                delete connectedStateByDonor[donorId];
+                saveConnectionState(connectedStateByDonor);
+                loadAvailableDonors(document.getElementById('bloodType').value);
+                alert(error.message || 'Failed to connect with donor.');
+            }
+        }
+
+        document.getElementById('bloodType').addEventListener('change', function() {
+            loadAvailableDonors(this.value);
+        });
+
+        if (loggedInReceiver) {
+            document.getElementById("contactName").value = loggedInReceiver.name || "";
+            document.getElementById("contactPhone").value = loggedInReceiver.phone || "";
+
+            document.getElementById("requestForm").onsubmit = function(event) {
+                event.preventDefault();
+
+                const payload = {
+                    blood_group: document.getElementById("bloodType").value.trim(),
+                    quantity: Number(document.getElementById("quantity").value || 1),
+                    patient_name: document.getElementById("patientName").value.trim(),
+                    patient_age: document.getElementById("patientAge").value ? Number(document.getElementById("patientAge").value) : null,
+                    patient_gender: document.getElementById("patientGender").value || null,
+                    hospital_name: document.getElementById("hospital").value.trim(),
+                    doctor_name: document.getElementById("doctorName").value.trim(),
+                    address_line1: document.getElementById("addressLine1").value.trim(),
+                    address_line2: document.getElementById("addressLine2").value.trim(),
+                    city: document.getElementById("city").value.trim(),
+                    district: document.getElementById("district").value.trim(),
+                    state: document.getElementById("state").value.trim(),
+                    pincode: document.getElementById("pincode").value.trim(),
+                    contact_name: document.getElementById("contactName").value.trim(),
+                    contact_phone: document.getElementById("contactPhone").value.trim(),
+                    alternate_contact_phone: document.getElementById("altContactPhone").value.trim(),
+                    medical_condition: document.getElementById("medicalCondition").value.trim(),
+                    health_notes: document.getElementById("healthNotes").value.trim(),
+                    required_by_date: document.getElementById("requiredByDate").value || null
+                };
+
+                createDetailedRequest(payload)
+                    .then(() => {
+                        alert("Request submitted successfully.");
+                        document.getElementById("requestForm").reset();
+                        loadMyRequests();
+                        loadAvailableDonors();
+                    })
+                    .catch((error) => {
+                        alert(error.message || "Failed to submit request.");
+                    });
+            };
+
+            loadMyRequests();
+            loadAvailableDonors();
+        }
+    </script>
+
+</body>
+</html>
+
+

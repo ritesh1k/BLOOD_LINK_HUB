@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emergency Blood Request</title>
+  <link rel="stylesheet" href="main-nav.css" />
+  <script defer src="main-nav.js"></script>
+  <style>
+    :root {
+      --bg: #f7f4ef;
+      --card: #ffffff;
+      --ink: #1f2937;
+      --brand: #b91c1c;
+      --brand-dark: #7f1d1d;
+      --muted: #6b7280;
+      --ok: #0f766e;
+      --err: #b91c1c;
+      --line: #eadfce;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background:
+        radial-gradient(circle at 10% 0%, #fff1f2 0, transparent 40%),
+        radial-gradient(circle at 90% 100%, #fef3c7 0, transparent 35%),
+        var(--bg);
+      color: var(--ink);
+    }
+
+    .wrap {
+      width: min(1000px, 92vw);
+      margin: 18px auto 40px;
+    }
+
+    .hero {
+      background: linear-gradient(120deg, #fee2e2, #fff7ed);
+      border: 1px solid #fecaca;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 8px 20px rgba(127, 29, 29, 0.08);
+    }
+
+    .hero h1 {
+      margin: 0 0 8px;
+      color: var(--brand-dark);
+      font-size: clamp(26px, 4vw, 38px);
+    }
+
+    .hero p {
+      margin: 0;
+      color: #7c2d12;
+      line-height: 1.5;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: 0 6px 16px rgba(31, 41, 55, 0.06);
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      color: var(--brand-dark);
+      font-size: 21px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .field { margin-bottom: 10px; }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid #d6d3d1;
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 15px;
+      background: #fff;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 10px;
+      padding: 11px 14px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      background: var(--brand);
+      color: #fff;
+    }
+
+    .btn:hover { background: var(--brand-dark); }
+
+    .muted {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 8px;
+      line-height: 1.5;
+    }
+
+    #requestMessage {
+      margin-top: 12px;
+      font-weight: 700;
+      min-height: 22px;
+    }
+
+    #myRequestsList {
+      margin: 10px 0 0;
+      padding-left: 18px;
+      line-height: 1.7;
+      color: #334155;
+    }
+
+    @media (max-width: 840px) {
+      .grid { grid-template-columns: 1fr; }
+      .row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div id="main-nav-root"></div>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1>Emergency Blood Request</h1>
+      <p>Use this page to raise an urgent request. Your request is sent to the platform request system so matching donors can be contacted quickly.</p>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h2>Raise Request</h2>
+        <form id="emergencyRequestForm">
+          <div class="row">
+            <div class="field">
+              <label for="fullName">Patient or Contact Name</label>
+              <input id="fullName" type="text" required />
+            </div>
+            <div class="field">
+              <label for="phone">Phone Number</label>
+              <input id="phone" type="tel" required />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" type="email" required />
+            </div>
+            <div class="field">
+              <label for="bloodGroup">Required Blood Group</label>
+              <select id="bloodGroup" required>
+                <option value="">Select</option>
+                <option>A+</option><option>A-</option><option>B+</option><option>B-</option>
+                <option>AB+</option><option>AB-</option><option>O+</option><option>O-</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="field">
+              <label for="units">Units Required</label>
+              <input id="units" type="number" min="1" max="10" value="1" required />
+            </div>
+            <div class="field">
+              <label for="urgency">Urgency</label>
+              <select id="urgency" required>
+                <option value="critical">Critical</option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="hospital">Hospital and City</label>
+            <input id="hospital" type="text" placeholder="Example: TMU Hospital, Moradabad" required />
+          </div>
+
+          <div class="field">
+            <label for="notes">Additional Details</label>
+            <textarea id="notes" placeholder="Patient condition, required by when, any extra details"></textarea>
+          </div>
+
+          <button class="btn" type="submit">Submit Emergency Request</button>
+          <div id="requestMessage"></div>
+          <p class="muted">Note: You must be logged in as a receiver account to submit into the backend requests system.</p>
+        </form>
+      </article>
+
+      <aside class="card">
+        <h2>My Active Requests</h2>
+        <button class="btn" id="refreshMyRequests" type="button">Refresh My Requests</button>
+        <ul id="myRequestsList"></ul>
+        <p class="muted">If you are not logged in, log in from Receiver Login and return to this page.</p>
+      </aside>
+    </section>
+  </main>
+
+  <script src="../api.js"></script>
+  <script>
+    const form = document.getElementById("emergencyRequestForm");
+    const msg = document.getElementById("requestMessage");
+    const myList = document.getElementById("myRequestsList");
+    const refreshBtn = document.getElementById("refreshMyRequests");
+
+    async function renderMyRequests() {
+      myList.innerHTML = "";
+      if (!localStorage.getItem("token")) {
+        myList.innerHTML = "<li>Please log in to view your requests.</li>";
+        return;
+      }
+
+      try {
+        const rows = await myRequests();
+        if (!rows.length) {
+          myList.innerHTML = "<li>No requests found yet.</li>";
+          return;
+        }
+
+        myList.innerHTML = rows.slice(0, 8).map(function (r) {
+          return "<li>#" + r.id + " | " + r.blood_group + " | " + r.quantity + " unit(s) | " + r.status + "</li>";
+        }).join("");
+      } catch (error) {
+        myList.innerHTML = "<li>Unable to load requests: " + (error.message || "Unknown error") + "</li>";
+      }
+    }
+
+    refreshBtn.addEventListener("click", renderMyRequests);
+
+    form.addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      const fullName = document.getElementById("fullName").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const bloodGroup = document.getElementById("bloodGroup").value;
+      const units = Number(document.getElementById("units").value);
+      const urgency = document.getElementById("urgency").value;
+      const hospital = document.getElementById("hospital").value.trim();
+      const notes = document.getElementById("notes").value.trim();
+
+      if (!localStorage.getItem("token")) {
+        msg.style.color = "#b91c1c";
+        msg.textContent = "Please log in as receiver before submitting emergency request.";
+        return;
+      }
+
+      if (!(fullName && phone && email && bloodGroup && units > 0 && hospital)) {
+        msg.style.color = "#b91c1c";
+        msg.textContent = "Please fill all required fields.";
+        return;
+      }
+
+      try {
+        const response = await createRequest({ blood_group: bloodGroup, quantity: units });
+
+        const history = JSON.parse(localStorage.getItem("emergency_request_meta") || "[]");
+        history.unshift({ fullName, phone, email, urgency, hospital, notes, createdAt: new Date().toISOString() });
+        localStorage.setItem("emergency_request_meta", JSON.stringify(history.slice(0, 20)));
+
+        const stats = response && response.notification ? response.notification : null;
+        const sentText = stats ? String(stats.sms_sent || 0) : "0";
+        const matchedText = stats ? String(stats.targeted_numbers || 0) : "0";
+
+        msg.style.color = "#0f766e";
+        msg.textContent = "Emergency request submitted successfully. SMS sent to " + sentText + " of " + matchedText + " matching donor numbers.";
+        form.reset();
+        renderMyRequests();
+      } catch (error) {
+        msg.style.color = "#b91c1c";
+        msg.textContent = error.message || "Unable to submit emergency request.";
+      }
+    });
+
+    renderMyRequests();
+  </script>
+</body>
+</html>

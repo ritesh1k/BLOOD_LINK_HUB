@@ -1,0 +1,119 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body.auth-page {
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  width: 100%;
+  margin: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+body.auth-page.donor-login-bg {
+  background-image: url('https://source.unsplash.com/1600x900/?blood,healthcare');
+}
+
+body.auth-page.donor-signup-bg {
+  background-image: url('https://source.unsplash.com/1600x900/?hospital,blood');
+}
+
+body.auth-page.receiver-bg {
+  background-image: url('https://source.unsplash.com/1600x900/?hospital,healthcare');
+}
+
+#main-nav-root {
+  width: 100%;
+}
+
+.container {
+  background: rgba(255, 255, 255, 0.93);
+  padding: 22px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  width: 92%;
+  max-width: 400px;
+  margin: 50px auto;
+  animation: fadeIn 0.7s ease-in-out;
+}
+
+h2 {
+  color: #d32f2f;
+  margin-bottom: 15px;
+  font-size: 24px;
+}
+
+input,
+select,
+button {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  transition: 0.3s;
+  font-size: 16px;
+}
+
+input:focus,
+select:focus {
+  border-color: #d32f2f;
+  box-shadow: 0 0 8px rgba(211, 47, 47, 0.5);
+  outline: none;
+}
+
+button {
+  background: #d32f2f;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #b71c1c;
+  transform: scale(1.03);
+}
+
+.auth-note {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.auth-note a {
+  color: #d32f2f;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.auth-note a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: 94%;
+    padding: 18px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

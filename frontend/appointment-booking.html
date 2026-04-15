@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Appointment Booking</title>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="appointment-booking.css">
+  <link rel="stylesheet" href="main-nav.css">
+  <script defer src="main-nav.js"></script>
+</head>
+
+<body>
+  <div id="main-nav-root"></div>
+
+  <div class="container">
+    <h2>Book an Appointment</h2>
+    
+    <form id="appointmentForm">
+      <div class="input-group">
+        <i class="fas fa-user"></i>
+        <input type="text" id="name" placeholder="Full Name" required>
+      </div>
+
+      <div class="input-group">
+        <i class="fas fa-envelope"></i>
+        <input type="email" id="email" placeholder="Email" required>
+      </div>
+
+      <div class="input-group">
+        <i class="fas fa-phone"></i>
+        <input type="tel" id="phone" placeholder="Phone Number" required>
+      </div>
+
+      <div class="input-group">
+        <i class="fas fa-calendar"></i>
+        <input type="date" id="date" required>
+      </div>
+
+      <div class="input-group">
+        <i class="fas fa-clock"></i>
+        <input type="time" id="time" required>
+      </div>
+
+      <button type="submit">Book Appointment</button>
+    </form>
+
+    <p id="confirmationMessage"></p>
+  </div>
+
+  <script src="../api.js"></script>
+
+  <script>
+    document.getElementById("appointmentForm").addEventListener("submit", async function(event) {
+      event.preventDefault();
+
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const phone = document.getElementById("phone").value;
+      const date = document.getElementById("date").value;
+      const time = document.getElementById("time").value;
+      const confirmationMessage = document.getElementById("confirmationMessage");
+      const currentUser = JSON.parse(localStorage.getItem("currentUser") || "null");
+
+      if (!(name && email && phone && date && time)) {
+        confirmationMessage.innerText = "❌ Please fill all the fields.";
+        confirmationMessage.style.color = "red";
+        confirmationMessage.style.opacity = "1";
+        confirmationMessage.style.transform = "translateY(0)";
+        return;
+      }
+
+      try {
+        const booking = await createAppointment({
+          user_id: currentUser?.id || null,
+          full_name: name,
+          email,
+          phone,
+          appointment_date: date,
+          appointment_time: time,
+          purpose: "donation"
+        });
+
+        const smsStatus = booking?.sms_status || "pending";
+        const emailStatus = booking?.email_status || "pending";
+        const notificationNote =
+          smsStatus === "skipped" || emailStatus === "skipped"
+            ? " Notifications were not sent because the email/SMS provider is not configured on the backend."
+            : "";
+
+        confirmationMessage.innerText = `✅ Appointment booked for ${name} on ${date} at ${time}. SMS: ${smsStatus}, Email: ${emailStatus}.${notificationNote}`;
+        confirmationMessage.style.color = "green";
+        confirmationMessage.style.opacity = "1";
+        confirmationMessage.style.transform = "translateY(0)";
+        this.reset();
+      } catch (error) {
+        confirmationMessage.innerText = `❌ ${error.message || "Unable to book appointment."}`;
+        confirmationMessage.style.color = "red";
+        confirmationMessage.style.opacity = "1";
+        confirmationMessage.style.transform = "translateY(0)";
+      }
+    });
+  </script>
+
+</body>
+</html>

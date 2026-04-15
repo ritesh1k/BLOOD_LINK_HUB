@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 92%;
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+        h2 {
+            text-align: center;
+            color: #d32f2f;
+        }
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .welcome {
+            font-size: 15px;
+            color: #333;
+            margin: 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background: #d32f2f;
+            color: white;
+        }
+        button {
+            padding: 5px 10px;
+            background: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background: darkgreen;
+        }
+        .logout-btn {
+            background: #d32f2f;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+        .logout-btn:hover {
+            background: #b71c1c;
+        }
+        .note {
+            color: #666;
+            font-size: 13px;
+            margin-top: 4px;
+        }
+        .status-pill {
+            display: inline-block;
+            border-radius: 999px;
+            padding: 3px 8px;
+            font-size: 12px;
+            font-weight: 700;
+            color: white;
+        }
+        .status-pending {
+            background: #ef6c00;
+        }
+        .status-accepted {
+            background: #2e7d32;
+        }
+    </style>
+    <link rel="stylesheet" href="main-nav.css">
+    <script defer src="main-nav.js"></script>
+</head>
+<body>
+    <div id="main-nav-root"></div>
+
+    <div class="container">
+        <div class="top-bar">
+            <p class="welcome" id="welcomeText"></p>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+        <p class="note" id="userDetails"></p>
+        <h2>Receiver Requests</h2>
+        <p class="note">You will see full recipient contact and address details after accepting a request.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Recipient</th>
+                    <th>Blood Type</th>
+                    <th>Units</th>
+                    <th>Hospital</th>
+                    <th>City</th>
+                    <th>Health Info</th>
+                    <th>Recipient Contact</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="requestsTable"></tbody>
+        </table>
+    </div>
+
+    <script src="../api.js"></script>
+
+    <script>
+        function normalizeRole(role) {
+            const value = String(role || "").trim().toLowerCase();
+            if (value === "donor") return "donor";
+            if (value === "receiver" || value === "recipient" || value === "receipent") return "receiver";
+            return null;
+        }
+
+        function dashboardRouteByRole(role) {
+            return role === "receiver" ? "receiver_dashboard.html" : "donor_dashboard.html";
+        }
+
+        function loginRouteByRole(role) {
+            return role === "receiver" ? "receiver_login.html" : "donor_login.html";
+        }
+
+        function initDonorDashboard() {
+            const currentUser = JSON.parse(localStorage.getItem("currentUser") || "null");
+            const token = localStorage.getItem("token");
+
+            if (!currentUser || !token) {
+                alert("Please login first.");
+                window.location.href = "donor_login.html";
+                return false;
+            }
+
+            const normalizedRole = normalizeRole(currentUser.role);
+            if (normalizedRole !== "donor") {
+                alert("You are not allowed to open donor dashboard.");
+                if (normalizedRole === "receiver") {
+                    window.location.href = dashboardRouteByRole(normalizedRole);
+                } else {
+                    window.location.href = "donor_login.html";
+                }
+                return false;
+            }
+
+            document.getElementById("welcomeText").textContent = `Welcome, ${currentUser.name}`;
+            document.getElementById("userDetails").textContent = `Email: ${currentUser.email || "-"} | Phone: ${currentUser.phone || "-"} | Blood Group: ${currentUser.bloodGroup || "-"}`;
+            return true;
+        }
+
+        function logout() {
+            localStorage.removeItem("currentUser");
+            localStorage.removeItem("token");
+            window.location.href = "donor_login.html";
+        }
+
+        function renderContactInfo(item, isAccepted) {
+            if (!isAccepted) {
+                return "Visible after acceptance";
+            }
+
+            const parts = [
+                item.contact_name,
+                item.contact_phone,
+                item.alternate_contact_phone,
+                item.address_line1,
+                item.address_line2,
+                item.city,
+                item.district,
+                item.state,
+                item.pincode
+            ].filter(Boolean);
+
+            return parts.length ? parts.join("<br>") : "No contact details provided";
+        }
+
+        async function loadRequests() {
+            const tableBody = document.getElementById("requestsTable");
+            tableBody.innerHTML = "<tr><td colspan='9'>Loading requests...</td></tr>";
+
+            try {
+                const requests = await listDonorRequests();
+                if (!Array.isArray(requests) || !requests.length) {
+                    tableBody.innerHTML = "<tr><td colspan='9'>No matching requests found.</td></tr>";
+                    return;
+                }
+
+                tableBody.innerHTML = requests.map((request) => {
+                    const isAccepted = Number(request.accepted_donor_id) > 0;
+                    const statusPill = isAccepted
+                        ? '<span class="status-pill status-accepted">Accepted</span>'
+                        : '<span class="status-pill status-pending">Pending</span>';
+                    const healthInfo = [request.medical_condition, request.health_notes].filter(Boolean).join("<br>") || "-";
+
+                    return `
+                        <tr>
+                            <td>${request.patient_name || request.receiver_name || "Receiver"}</td>
+                            <td>${request.blood_group || "-"}</td>
+                            <td>${request.quantity || "-"}</td>
+                            <td>${request.hospital_name || "-"}<br>${request.doctor_name || ""}</td>
+                            <td>${request.city || "-"}</td>
+                            <td>${healthInfo}</td>
+                            <td>${renderContactInfo(request, isAccepted)}</td>
+                            <td>${statusPill}</td>
+                            <td>
+                                ${isAccepted ? "Accepted by you" : `<button onclick="acceptRequest(${request.id})">Accept</button>`}
+                            </td>
+                        </tr>
+                    `;
+                }).join("");
+            } catch (error) {
+                tableBody.innerHTML = `<tr><td colspan='9'>${error.message || "Failed to load requests."}</td></tr>`;
+            }
+        }
+
+        async function acceptRequest(requestId) {
+            try {
+                await acceptDonorRequest(requestId);
+                alert("Request accepted. Recipient contact details are now visible.");
+                await loadRequests();
+            } catch (error) {
+                alert(error.message || "Failed to accept request.");
+            }
+        }
+
+        if (initDonorDashboard()) {
+            loadRequests();
+        }
+    </script>
+
+</body>
+</html>
+
+

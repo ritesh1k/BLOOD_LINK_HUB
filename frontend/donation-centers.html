@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blood Donation Platform</title>
+  <link rel="stylesheet" href="donation-centers-page.css">
+  <link rel="stylesheet" href="main-nav.css">
+  <script defer src="main-nav.js"></script>
+  <script defer src="donation-centers-page.js"></script>
+  <!-- Font Awesome for social media icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <div id="main-nav-root"></div>
+
+  <main class="container page-content">
+    <section class="filters-panel">
+      <h1>Find Donation Centers and Hospitals</h1>
+      <p class="panel-subtext">Filter by state and district to narrow the results.</p>
+      <div class="filter-grid">
+        <div class="filter-field">
+          <label for="stateFilterInput">State</label>
+          <div class="search-dropdown-wrapper">
+            <input type="text" id="stateFilterInput" placeholder="Type to search or select..." autocomplete="off" class="search-input">
+            <div id="stateFilterDropdown" class="dropdown-menu" style="display: none;"></div>
+          </div>
+        </div>
+        <div class="filter-field">
+          <label for="districtFilterInput">District</label>
+          <div class="search-dropdown-wrapper">
+            <input type="text" id="districtFilterInput" placeholder="Type to search or select..." autocomplete="off" class="search-input" disabled>
+            <div id="districtFilterDropdown" class="dropdown-menu" style="display: none;"></div>
+          </div>
+        </div>
+        <button id="clearFilters" class="filter-btn" type="button">Clear Filters</button>
+      </div>
+      <p id="resultSummary" class="result-summary"></p>
+    </section>
+
+    <section class="data-section">
+      <div class="section-header">
+        <h2>Donation Centers</h2>
+        <span class="count-pill" id="centerCount">0 found</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Donation Center</th>
+              <th>State</th>
+              <th>District</th>
+              <th>Address</th>
+              <th>Phone</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody id="centerRows">
+            <!-- Populated by JS -->
+          </tbody>
+        </table>
+      </div>
+      <p id="centerEmpty" class="empty-state" hidden>No donation centers match this filter.</p>
+    </section>
+
+    <section class="data-section">
+      <div class="section-header">
+        <h2>Hospitals</h2>
+        <span class="count-pill" id="hospitalCount">0 found</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Hospital Name</th>
+              <th>State</th>
+              <th>District</th>
+              <th>Address</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody id="hospitalRows">
+            <!-- Populated by JS -->
+          </tbody>
+        </table>
+      </div>
+      <p id="hospitalEmpty" class="empty-state" hidden>No hospitals match this filter.</p>
+    </section>
+
+  </main>
+  <!-- Details Modal -->
+  <div id="detailsModal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <span id="closeModal" class="close">&times;</span>
+      <h2 id="modalTitle">Center/Hospital Details</h2>
+      <div id="modalDetails"></div>
+      <div id="modalContactSection" style="display: none;">
+        <h3>Contact Information</h3>
+        <div id="modalContact"></div>
+      </div>
+      <div id="modalWebsiteSection" style="display: none;">
+        <h3>Official Links</h3>
+        <div id="modalWebsite"></div>
+      </div>
+      <div id="modalBloodAvailability">
+        <h3>Blood Availability</h3>
+        <p id="bloodAvailabilityInfo">Loading...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer (matching home page) -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="faqs.html">FAQs</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="terms-and-conditions.html">Terms & Conditions</a></li>
+        </ul>
+      </div>
+
+      <div class="contact-info">
+        <h4>Contact</h4>
+        <p><i class="fas fa-envelope"></i> info@bloodlinkhub.com</p>
+        <p><i class="fas fa-phone"></i> +91 7295014633</p>
+        <p><i class="fas fa-map-marker-alt"></i> MORADABAD (TMU), India</p>
+      </div>
+
+      <div class="social-media">
+        <h4>Follow Us</h4>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <div class="newsletter">
+        <h4>Stay Updated</h4>
+        <form>
+          <input type="email" placeholder="Enter your email"/>
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 BloodLink Hub | All Rights Reserved</p>
+    </div>
+  </footer>
+</body>
+</html>
+
+

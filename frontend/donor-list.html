@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blood Donors List</title>
+  <link rel="stylesheet" href="donor-list.css">
+  <link rel="stylesheet" href="main-nav.css">
+  <script defer src="main-nav.js"></script>
+</head>
+<body>
+  <div id="main-nav-root"></div>
+
+  <div class="container">
+    <h2>Available Blood Donors</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Blood Type</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>State</th>
+            <th>District</th>
+            <th>Mobile</th>
+          </tr>
+        </thead>
+        <tbody id="results"></tbody>
+      </table>
+    </div>
+    <button onclick="goBack()">Back to Search</button>
+  </div>
+
+  <script src="../api.js"></script>
+  <script src="donor-results-common.js"></script>
+
+  <script>
+    async function loadResults() {
+      await loadDonorResultsFromStorage({
+        resultsSelector: '#results',
+        includePhone: true,
+        noSearchMessage: 'No search parameters found.',
+        loadingMessage: 'Loading donors...',
+        emptyMessage: 'No donors found. Try adjusting your search criteria.',
+        errorMessage: 'Failed to load donors.'
+      });
+    }
+
+    function goBack() {
+      window.location.href = "donor-search.html";
+    }
+
+    window.onload = loadResults;
+  </script>
+
+</body>
+</html>
+

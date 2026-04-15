@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blood Donation Campaigns</title>
+  <link rel="stylesheet" href="main-nav.css" />
+  <script defer src="main-nav.js"></script>
+  <style>
+    :root {
+      --bg: #eef6ff;
+      --card: #ffffff;
+      --ink: #0f172a;
+      --brand: #0f766e;
+      --brand-dark: #0b5f59;
+      --line: #cfe2f3;
+      --muted: #475569;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background:
+        radial-gradient(circle at 90% 0%, #cffafe 0, transparent 33%),
+        radial-gradient(circle at 10% 100%, #dbeafe 0, transparent 30%),
+        var(--bg);
+      color: var(--ink);
+    }
+
+    .wrap {
+      width: min(1100px, 92vw);
+      margin: 18px auto 40px;
+    }
+
+    .hero {
+      background: linear-gradient(120deg, #ccfbf1, #f0fdfa);
+      border: 1px solid #99f6e4;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 8px 20px rgba(15, 118, 110, 0.1);
+    }
+
+    .hero h1 {
+      margin: 0 0 8px;
+      color: var(--brand-dark);
+      font-size: clamp(26px, 4vw, 38px);
+    }
+
+    .hero p {
+      margin: 0;
+      color: #134e4a;
+      line-height: 1.5;
+    }
+
+    .layout {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: 1fr 0.9fr;
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: 0 6px 14px rgba(15, 23, 42, 0.06);
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      color: var(--brand-dark);
+      font-size: 21px;
+    }
+
+    .campaigns {
+      display: grid;
+      gap: 10px;
+    }
+
+    .campaign {
+      border: 1px solid #dbeafe;
+      border-left: 5px solid var(--brand);
+      border-radius: 12px;
+      padding: 12px;
+      background: #f8fafc;
+    }
+
+    .campaign h3 {
+      margin: 0 0 6px;
+      font-size: 18px;
+      color: #134e4a;
+    }
+
+    .meta {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .field { margin-bottom: 10px; }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 15px;
+      background: #fff;
+    }
+
+    textarea {
+      min-height: 86px;
+      resize: vertical;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 10px;
+      padding: 11px 14px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      background: var(--brand);
+      color: #fff;
+    }
+
+    .btn:hover { background: var(--brand-dark); }
+
+    #campaignMessage {
+      margin-top: 10px;
+      min-height: 22px;
+      font-weight: 700;
+    }
+
+    .muted {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 8px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div id="main-nav-root"></div>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1>Blood Donation Campaigns</h1>
+      <p>Find upcoming blood drives and register your participation. The organizer will contact you with time slot and preparation details.</p>
+    </section>
+
+    <section class="layout">
+      <article class="card">
+        <h2>Upcoming Campaigns</h2>
+        <div id="campaignList" class="campaigns"></div>
+      </article>
+
+      <aside class="card">
+        <h2>Join a Campaign</h2>
+        <form id="campaignJoinForm">
+          <div class="field">
+            <label for="name">Full Name</label>
+            <input id="name" type="text" required />
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" type="email" required />
+          </div>
+
+          <div class="field">
+            <label for="phone">Phone Number</label>
+            <input id="phone" type="tel" required />
+          </div>
+
+          <div class="field">
+            <label for="bloodGroup">Blood Group</label>
+            <select id="bloodGroup" required>
+              <option value="">Select</option>
+              <option>A+</option><option>A-</option><option>B+</option><option>B-</option>
+              <option>AB+</option><option>AB-</option><option>O+</option><option>O-</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="campaignName">Campaign</label>
+            <select id="campaignName" required></select>
+          </div>
+
+          <div class="field">
+            <label for="notes">Notes</label>
+            <textarea id="notes" placeholder="Any availability or health notes"></textarea>
+          </div>
+
+          <button class="btn" type="submit">Register for Campaign</button>
+          <div id="campaignMessage"></div>
+          <p class="muted">This sends your registration to the campaign coordination team through the platform contact system.</p>
+        </form>
+      </aside>
+    </section>
+  </main>
+
+  <script src="../api.js"></script>
+  <script>
+    const campaigns = [
+      { name: "City Center Mega Drive", date: "2026-04-02", place: "City Community Hall", timing: "9:00 AM - 3:00 PM" },
+      { name: "University Youth Donation Camp", date: "2026-04-09", place: "TMU Campus Block A", timing: "10:00 AM - 4:00 PM" },
+      { name: "Weekend Family Blood Drive", date: "2026-04-20", place: "District Sports Complex", timing: "8:30 AM - 1:30 PM" }
+    ];
+
+    const campaignList = document.getElementById("campaignList");
+    const campaignName = document.getElementById("campaignName");
+    const joinForm = document.getElementById("campaignJoinForm");
+    const campaignMessage = document.getElementById("campaignMessage");
+    const currentUser = JSON.parse(localStorage.getItem("currentUser") || "null");
+
+    campaignList.innerHTML = campaigns.map(function (c) {
+      return "<div class=\"campaign\">" +
+        "<h3>" + c.name + "</h3>" +
+        "<p class=\"meta\"><strong>Date:</strong> " + c.date + "</p>" +
+        "<p class=\"meta\"><strong>Location:</strong> " + c.place + "</p>" +
+        "<p class=\"meta\"><strong>Time:</strong> " + c.timing + "</p>" +
+      "</div>";
+    }).join("");
+
+    campaignName.innerHTML = "<option value=\"\">Select campaign</option>" + campaigns.map(function (c) {
+      return "<option value=\"" + c.name + "\">" + c.name + "</option>";
+    }).join("");
+
+    if (currentUser && currentUser.name) {
+      const nameField = document.getElementById("name");
+      nameField.value = currentUser.name;
+    }
+
+    joinForm.addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const bloodGroup = document.getElementById("bloodGroup").value;
+      const selectedCampaign = campaignName.value;
+      const notes = document.getElementById("notes").value.trim();
+
+      if (!(name && email && phone && bloodGroup && selectedCampaign)) {
+        campaignMessage.style.color = "#b91c1c";
+        campaignMessage.textContent = "Please fill all required fields.";
+        return;
+      }
+
+      const message = [
+        "Campaign Registration",
+        "Campaign: " + selectedCampaign,
+        "Name: " + name,
+        "Email: " + email,
+        "Phone: " + phone,
+        "Blood Group: " + bloodGroup,
+        notes ? "Notes: " + notes : "Notes: -"
+      ].join("\n");
+
+      try {
+        await submitContactMessage({
+          user_id: currentUser && currentUser.id ? currentUser.id : null,
+          name: name,
+          email: email,
+          subject: "Campaign Registration",
+          message: message
+        });
+
+        campaignMessage.style.color = "#0f766e";
+        campaignMessage.textContent = "Registered successfully. We will contact you soon.";
+        joinForm.reset();
+      } catch (error) {
+        campaignMessage.style.color = "#b91c1c";
+        campaignMessage.textContent = error.message || "Unable to register now.";
+      }
+    });
+  </script>
+</body>
+</html>

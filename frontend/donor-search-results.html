@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donor Search Results</title>
+  <link rel="stylesheet" href="donor-search-results.css">
+  <link rel="stylesheet" href="main-nav.css">
+  <script defer src="main-nav.js"></script>
+</head>
+<body>
+  <div id="main-nav-root"></div>
+  <div class="container">
+    <h2>Donor Search Results</h2>
+    <div id="results"></div>
+    <div class="table-wrap">
+      <table id="donorsTable">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Blood Type</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>State</th>
+            <th>District</th>
+          </tr>
+        </thead>
+        <tbody id="donorsTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="../api.js"></script>
+  <script src="donor-results-common.js"></script>
+
+  <script>
+    async function loadDonorSearchResults() {
+      const resultsNode = document.getElementById('results');
+      const tableBody = document.getElementById('donorsTableBody');
+      const searchParamsRaw = localStorage.getItem('searchParams');
+
+      if (!searchParamsRaw) {
+        resultsNode.innerHTML = '<p>No search parameters found. Please go back and search for donors.</p>';
+        return;
+      }
+
+      resultsNode.innerHTML = '<p>Loading recent donors...</p>';
+      tableBody.innerHTML = '';
+
+      try {
+        const donors = await listDonors(buildDonorQueryFromSearchParams(JSON.parse(searchParamsRaw), 50));
+        if (!Array.isArray(donors) || !donors.length) {
+          resultsNode.innerHTML = '<p>No donors found matching your search criteria.</p>';
+          return;
+        }
+
+        resultsNode.innerHTML = `<p>Showing ${donors.length} recent available donor(s).</p>`;
+        tableBody.innerHTML = renderDonorRows(donors);
+      } catch (error) {
+        resultsNode.innerHTML = `<p>${error.message || 'Failed to load donor data.'}</p>`;
+      }
+    }
+
+    loadDonorSearchResults();
+  </script>
+</body>
+</html>

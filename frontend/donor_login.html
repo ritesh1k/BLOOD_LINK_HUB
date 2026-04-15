@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Login</title>
+    <link rel="stylesheet" href="auth-pages.css">
+    <link rel="stylesheet" href="main-nav.css">
+    <script defer src="main-nav.js"></script>
+</head>
+<body class="auth-page donor-login-bg">
+    <div id="main-nav-root"></div>
+    <div class="container">
+        <h2>Donor Login</h2>
+        <form id="loginForm">
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <p class="auth-note"><a href="forgot-password.html?role=donor">Forgot password?</a></p>
+        <p class="auth-note">New donor? <a href="donor-signup.html">Sign Up</a></p>
+    </div>
+
+    <script src="../api.js"></script>
+
+    <script>
+        function dashboardRouteByRole(role) {
+            return role === "donor" ? "donor_dashboard.html" : "receiver_dashboard.html";
+        }
+
+        function loginRouteByRole(role) {
+            return role === "donor" ? "donor_login.html" : "receiver_login.html";
+        }
+
+        (function redirectIfAlreadyLoggedIn() {
+            const currentUser = JSON.parse(localStorage.getItem("currentUser") || "null");
+            const token = localStorage.getItem("token");
+            if (currentUser && token && (currentUser.role === "donor" || currentUser.role === "receiver")) {
+                window.location.replace(dashboardRouteByRole(currentUser.role));
+            }
+        })();
+
+        document.getElementById("loginForm").onsubmit = async function(event) {
+            event.preventDefault();
+            let email = document.getElementById("email").value.trim().toLowerCase();
+            let password = document.getElementById("password").value;
+
+            try {
+                const res = await loginUser({ email, password, role: "donor" });
+                const apiUser = res.user || {};
+                const effectiveRole = apiUser.role || "donor";
+
+                if (effectiveRole !== "donor") {
+                    alert("This account is registered as receiver. Please use receiver login.");
+                    window.location.href = loginRouteByRole(effectiveRole);
+                    return;
+                }
+
+                localStorage.setItem("currentUser", JSON.stringify({
+                    id: apiUser.id || null,
+                    userId: `donor_${apiUser.email || email}`,
+                    role: effectiveRole,
+                    name: apiUser.name || "Donor",
+                    email: apiUser.email || email,
+                    bloodGroup: apiUser.blood_group || "",
+                    phone: apiUser.phone || "",
+                    address: ""
+                }));
+
+                alert("Login successful!");
+                window.location.href = dashboardRouteByRole(effectiveRole);
+            } catch (error) {
+                alert(error.message || "Invalid credentials.");
+            }
+        };
+    </script>
+</body>
+</html>
+
+

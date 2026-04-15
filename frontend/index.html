@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blood Donation Platform</title>
+  <link rel="stylesheet" href="home.css"/>
+  <link rel="stylesheet" href="main-nav.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  <script defer src="main-nav.js"></script>
+</head>
+<body>
+  <div id="main-nav-root"></div>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="overlay"></div>
+  <div class="hero-content container">
+    <h1>Donate Blood, Save Lives</h1>
+    <p>Your small act of kindness can save up to 3 lives. Be a hero today!</p>
+    <div class="cta-buttons">
+      <a href="donor_login.html" class="btn btn-primary"><i class="fas fa-user"></i> Donor Login</a>
+      <a href="receiver-login-alt.html" class="btn btn-secondary"><i class="fas fa-hand-holding-heart"></i> Recipient Login</a>
+    </div>
+  </div>
+</section>
+
+<!-- Portal Access -->
+<section class="portal-access container">
+  <h2 class="section-title">Portal Access</h2>
+  <div class="portal-grid">
+    <div class="portal-card">
+      <h3><i class="fas fa-user-plus"></i> New Donor</h3>
+      <p>Create your donor account and become available for nearby requests.</p>
+      <a href="donor-signup.html" class="btn btn-primary">Create Donor Account</a>
+    </div>
+    <div class="portal-card">
+      <h3><i class="fas fa-procedures"></i> Need Blood</h3>
+      <p>Log in as a receiver to search donors and raise urgent blood requests.</p>
+      <a href="receiver_signup.html" class="btn btn-primary">Create Receipent Account</a>
+    </div>
+    <div class="portal-card">
+      <h3><i class="fas fa-tachometer-alt"></i> Dashboard</h3>
+      <p>Go directly to your user area to manage profile, availability, and requests.</p>
+      <a href="user-dashboard.html" class="btn btn-primary" id="openDashboardBtn">Open Dashboard</a>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="features container">
+  <h2 class="section-title">Key Features</h2>
+  <div class="feature-grid">
+    <div class="feature-item">
+      <a href="donor-search.html"><img src="donor.png" alt="Find a Donor"/></a>
+      <h3>Find a Donor</h3>
+      <p>Quickly locate available donors near you.</p>
+    </div>
+    <div class="feature-item">
+      <a href="donation-centers.html"><img src="donation-center.jpeg" alt="Donation Centers"/></a>
+      <h3>Donation Centers</h3>
+      <p>Locate nearby donation facilities instantly.</p>
+    </div>
+    <div class="feature-item">
+      <a href="eligibility-checker.html"><img src="eligibility.png" alt="Eligibility Checker"/></a>
+      <h3>Eligibility Checker</h3>
+      <p>Find out if you’re ready to donate blood.</p>
+    </div>
+    <div class="feature-item">
+      <a href="appointment-booking.html"><img src="appointment.png" alt="Appointment Booking"/></a>
+      <h3>Appointment Booking</h3>
+      <p>Book a slot online in minutes.</p>
+    </div>
+    <div class="feature-item">
+      <a href="emergency-request.html" class="feature-link">
+        <img src="emergency.png" alt="Emergency Requests"/>
+        <h3>Emergency Requests</h3>
+        <p>Post urgent blood requirements instantly.</p>
+        <span class="feature-link-text">Open emergency request page</span>
+      </a>
+    </div>
+    <div class="feature-item">
+      <a href="blood-donation-campaigns.html"><img src="campaign.png" alt="Donation Campaigns"/></a>
+      <h3>Blood Donation Campaigns</h3>
+      <p>Join upcoming donation drives in your city.</p>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section class="how-it-works container">
+  <h2 class="section-title">How It Works</h2>
+  <div class="steps-grid">
+    <div class="step-card">
+      <span class="step-number">1</span>
+      <h3>Create Account</h3>
+      <p>Sign up as donor or receiver with your blood group and contact details.</p>
+      <a href="donor-signup.html">Get Started</a>
+    </div>
+    <div class="step-card">
+      <span class="step-number">2</span>
+      <h3>Find or Offer Blood</h3>
+      <p>Search donors by blood group or mark yourself available in your area.</p>
+      <a href="donor-search.html">Find Donors</a>
+    </div>
+    <div class="step-card">
+      <span class="step-number">3</span>
+      <h3>Manage Requests</h3>
+      <p>Post emergency needs and track active requests from your dashboard.</p>
+      <a href="emergency-request.html">Raise Request</a>
+    </div>
+  </div>
+</section>
+
+<!-- Live Stats -->
+<section class="stats-section">
+  <div class="container">
+    <h2 class="section-title">Our Impact</h2>
+    <div class="stats-grid">
+      <div class="stat-box">
+        <i class="fas fa-users"></i>
+        <h3>5000+</h3>
+        <p>Registered Donors</p>
+      </div>
+      <div class="stat-box">
+        <i class="fas fa-tint"></i>
+        <h3>10,000+</h3>
+        <p>Units of Blood Donated</p>
+      </div>
+      <div class="stat-box">
+        <i class="fas fa-smile"></i>
+        <h3>7,500+</h3>
+        <p>Lives Saved</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials">
+  <div class="container">
+    <h2 class="section-title">What People Say</h2>
+    <div class="testimonial-grid">
+      <div class="testimonial">
+        <p>“Thanks to BloodLink Hub, I found a donor within 30 minutes for my father’s surgery!”</p>
+        <h4>- Priya Sharma</h4>
+      </div>
+      <div class="testimonial">
+        <p>“The process was quick and smooth. I’ll definitely donate again!”</p>
+        <h4>- Rajesh Kumar</h4>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why Donate -->
+<section class="why-donate">
+  <div class="container">
+    <h2 class="section-title">Why Donate Blood?</h2>
+    <div class="stats">
+      <div class="stat">
+        <h3>Every 2 Seconds</h3>
+        <p>Someone needs blood.</p>
+      </div>
+      <div class="stat">
+        <h3>1 Donation</h3>
+        <p>Can save up to 3 lives.</p>
+      </div>
+    </div>
+    <ul class="benefits">
+      <li><i class="fas fa-heartbeat"></i> Help patients in need</li>
+      <li><i class="fas fa-users"></i> Strengthen your community</li>
+      <li><i class="fas fa-notes-medical"></i> Get a free health check-up</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container footer-grid">
+    <div class="footer-links">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="faqs.html">FAQs</a></li>
+        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="terms-and-conditions.html">Terms & Conditions</a></li>
+      </ul>
+    </div>
+
+    <div class="contact-info">
+      <h4>Contact</h4>
+      <p><i class="fas fa-envelope"></i> info@bloodlinkhub.com</p>
+      <p><i class="fas fa-phone"></i> +91 7295014633</p>
+      <p><i class="fas fa-map-marker-alt"></i> MORADABAD (TMU), India</p>
+    </div>
+
+    <div class="social-media">
+      <h4>Follow Us</h4>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+
+    <div class="newsletter">
+      <h4>Stay Updated</h4>
+      <form id="newsletterForm">
+        <input type="email" id="newsletterEmail" placeholder="Enter your email" required/>
+        <button type="submit" class="btn btn-primary">Subscribe</button>
+      </form>
+      <p id="newsletterMessage" style="margin-top:8px;font-size:13px;"></p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 BloodLink Hub | All Rights Reserved</p>
+  </div>
+</footer>
+
+<script src="../api.js"></script>
+<script>
+  function normalizeRole(role) {
+    const value = String(role || '').trim().toLowerCase();
+
+    if (value === 'donor') return 'donor';
+    if (value === 'receiver' || value === 'recipient' || value === 'receipent') return 'receiver';
+    return null;
+  }
+
+  function dashboardByRole(role) {
+    return role === 'donor' ? 'donor_dashboard.html' : 'receiver_dashboard.html';
+  }
+
+  const openDashboardBtn = document.getElementById('openDashboardBtn');
+
+  if (openDashboardBtn) {
+    openDashboardBtn.addEventListener('click', function (event) {
+      event.preventDefault();
+      const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+      const token = localStorage.getItem('token');
+
+      if (!currentUser || !token) {
+        window.location.href = 'index.html';
+        return;
+      }
+
+      const normalizedRole = normalizeRole(currentUser.role);
+      if (normalizedRole) {
+        window.location.href = dashboardByRole(normalizedRole);
+        return;
+      }
+
+      window.location.href = 'index.html';
+    });
+  }
+
+  const newsletterForm = document.getElementById('newsletterForm');
+  const newsletterEmail = document.getElementById('newsletterEmail');
+  const newsletterMessage = document.getElementById('newsletterMessage');
+
+  newsletterForm.addEventListener('submit', async function (event) {
+    event.preventDefault();
+    const email = newsletterEmail.value.trim().toLowerCase();
+
+    if (!email) {
+      newsletterMessage.textContent = 'Please enter a valid email.';
+      newsletterMessage.style.color = 'red';
+      return;
+    }
+
+    try {
+      await subscribeNewsletter({ email, source_page: 'index.html' });
+      newsletterMessage.textContent = 'Subscribed successfully!';
+      newsletterMessage.style.color = 'green';
+      newsletterForm.reset();
+    } catch (error) {
+      newsletterMessage.textContent = error.message || 'Unable to subscribe right now.';
+      newsletterMessage.style.color = 'red';
+    }
+  });
+</script>
+</body>
+</html>

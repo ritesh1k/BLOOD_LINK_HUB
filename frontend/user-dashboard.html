@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Redirect</title>
+</head>
+<body>
+    <p id="status">Checking your account...</p>
+
+    <script>
+        (function routeDashboard() {
+            const status = document.getElementById("status");
+            const currentUser = JSON.parse(localStorage.getItem("currentUser") || "null");
+            const token = localStorage.getItem("token");
+
+            function normalizeRole(role) {
+                const value = String(role || "").trim().toLowerCase();
+
+                if (value === "donor") return "donor";
+                if (value === "receiver" || value === "recipient" || value === "receipent") return "receiver";
+                return null;
+            }
+
+            if (!currentUser || !token) {
+                status.textContent = "Please login to continue.";
+                window.location.replace("index.html");
+                return;
+            }
+
+            const normalizedRole = normalizeRole(currentUser.role);
+
+            if (normalizedRole === "donor") {
+                window.location.replace("donor_dashboard.html");
+                return;
+            }
+
+            if (normalizedRole === "receiver") {
+                window.location.replace("receiver_dashboard.html");
+                return;
+            }
+
+            status.textContent = "Unknown account role. Please login again.";
+            localStorage.removeItem("currentUser");
+            localStorage.removeItem("token");
+            window.location.replace("index.html");
+        })();
+    </script>
+</body>
+</html>

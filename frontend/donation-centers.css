@@ -1,0 +1,199 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+  }
+  
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .heroimg{
+
+    width: 200px;
+  }
+  
+  h1, h2, h3, h4 {
+    color: #d32f2f; /* Red color for headings */
+  }
+  
+  a {
+    text-decoration: none;
+    color: #d32f2f;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Header Styles */
+  header {
+    background: #fff;
+    padding: 20px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  
+  
+  header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  header nav ul li {
+    margin: 0 50px;
+  }
+  header nav ul li img{
+    width: 100px;
+    margin: 0px;
+    padding: 0px;
+  }
+  
+  header .cta-button {
+    background: #d32f2f;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: 900;
+    font-size: 2rem;
+  }
+  
+  /* Hero Section Styles */
+  .hero {
+    background: url('hero-banner.jpg') no-repeat center center/cover;
+    color: #fff;
+    text-align: center;
+    padding: 100px 0;
+  }
+  
+  .hero h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+  
+  .hero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+  }
+  
+  .hero .cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .hero .cta-button {
+    background: #fff;
+    color: #d32f2f;
+    padding: 10px 20px;
+    border-radius: 5px;
+  }
+  
+  .hero .search-bar {
+    margin-top: 30px;
+  }
+  
+  .hero .search-bar input {
+    padding: 10px;
+    width: 300px;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .hero .search-bar button {
+    padding: 10px 20px;
+    background: #d32f2f;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Features Section Styles */
+  .features {
+    padding: 50px 0;
+    text-align: center;
+  }
+  
+  .features h2 {
+    margin-bottom: 40px;
+  }
+  
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  
+  .feature-item img {
+    height: 50px;
+    margin-bottom: 10px;
+  }
+  
+  /* Why Donate Section Styles */
+  .why-donate {
+    background: #f9f9f9;
+    padding: 50px 0;
+    text-align: center;
+  }
+  
+  .why-donate h2 {
+    margin-bottom: 20px;
+  }
+  
+  .why-donate .stats {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+  
+  .why-donate .benefits ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .why-donate .benefits ul li {
+    margin: 10px 0;
+  }
+  
+  /* Footer Styles */
+  footer {
+    background: #d00f0f;
+    color: #fff;
+    padding: 50px 0;
+  }
+  
+  footer .footer-links, footer .contact-info, footer .social-media, footer .newsletter {
+    margin-bottom: 20px;
+  }
+  
+  footer h4 {
+    margin-bottom: 10px;
+  }
+  
+  footer .social-media img {
+    height: 30px;
+    margin-right: 10px;
+  }
+  
+  footer .newsletter input {
+    padding: 10px;
+    width: 200px;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  footer .newsletter button {
+    padding: 10px 20px;
+    background: #d32f2f;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  

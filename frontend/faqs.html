@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - BloodLink Hub</title>
+    <!-- Font Awesome CDN for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        #main-nav-root {
+            width: 100%;
+        }
+        .faq-hero {
+            background-color: #ff4d4d;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        .faq-hero h1 {
+            margin: 0;
+            font-size: 3em;
+            letter-spacing: 1px;
+        }
+        .faq-hero p {
+            margin-top: 10px;
+            font-size: 1.2em;
+            font-weight: 300;
+        }
+        .faq-container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 30px;
+            background-color: white;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .faq-container h2 {
+            color: #ff4d4d;
+            font-size: 2.5em;
+            margin-top: 0;
+            border-bottom: 2px solid #ff4d4d;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .faq-item {
+            margin-bottom: 20px;
+            transition: transform 0.3s ease-in-out;
+        }
+        .faq-item h3 {
+            color: #ff4d4d;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            transition: transform 0.3s ease-in-out;
+            display: flex;
+            align-items: center;
+        }
+        .faq-item i {
+            margin-right: 10px;
+            font-size: 1.8em;
+        }
+        .faq-item p {
+            line-height: 1.6;
+            font-size: 1.1em;
+        }
+        .faq-item ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        .faq-item ul li {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+        .faq-item ul li:hover {
+            color: #ff4d4d;
+            cursor: pointer;
+        }
+        .faq-item:hover h3 {
+            transform: scale(1.1);
+        }
+        .faq-footer {
+            background-color: #ff4d4d;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            margin-top: 20px;
+            font-size: 1.1em;
+        }
+        .faq-footer p {
+            margin: 0;
+        }
+    </style>
+    <link rel="stylesheet" href="main-nav.css">
+    <script defer src="main-nav.js"></script>
+</head>
+<body>
+    <div id="main-nav-root"></div>
+
+    <div class="faq-container">
+        <h2>Frequently Asked Questions (FAQ) About BloodLink Hub</h2>
+
+        <div class="faq-item">
+            <h3><i class="fas fa-user-shield"></i> 1. Who can donate blood?</h3>
+            <p>Most people can donate blood if they are in good health, meet the age and weight requirements, and have no medical conditions that would put them or the recipient at risk. Generally, donors must:</p>
+            <ul>
+                <li>Be at least 17 years old (or 16 with parental consent in some regions).</li>
+                <li>Weigh at least 110 pounds (50 kg).</li>
+                <li>Be in good health on the day of donation.</li>
+            </ul>
+        </div>
+
+        <div class="faq-item">
+            <h3><i class="fas fa-calendar-day"></i> 2. How often can I donate blood?</h3>
+            <ul>
+                <li><strong>Whole Blood Donation:</strong> Every 56 days (up to 6 times a year).</li>
+                <li><strong>Platelet Donation:</strong> Every 7 days, up to 24 times a year.</li>
+                <li><strong>Plasma Donation:</strong> Every 28 days.</li>
+            </ul>
+        </div>
+
+        <div class="faq-item">
+            <h3><i class="fas fa-shield-alt"></i> 3. Is blood donation safe?</h3>
+            <p>Yes, blood donation is safe. Sterile, single-use equipment is used for each donor, so there is no risk of contracting infections.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3><i class="fas fa-clock"></i> 4. How long does the donation process take?</h3>
+            <ul>
+                <li><strong>Whole Blood Donation:</strong> About 10-15 minutes for the actual donation, plus registration and a brief health screening (total time: ~45 minutes to 1 hour).</li>
+                <li><strong>Platelet or Plasma Donation:</strong> Takes about 1.5 to 2 hours.</li>
+            </ul>
+        </div>
+
+        <div class="faq-item">
+            <h3><i class="fas fa-utensils"></i> 5. What should I do before donating blood?</h3>
+            <ul>
+                <li>Eat a healthy meal and drink plenty of water.</li>
+                <li>Bring a valid ID (e.g., driver’s license, passport).</li>
+                <li>Get a good night’s sleep.</li>
+                <li>Avoid fatty foods before donating.</li>
+            </ul>
+        </div>
+
+        <div class="faq-item">
+            <h3><i class="fas fa-check-circle"></i> 6. What should I do after donating blood?</h3>
+            <ul>
+                <li>Rest for a few minutes and enjoy a snack or drink provided at the donation center.</li>
+                <li>Avoid strenuous activity for the rest of the day.</li>
+                <li>Drink extra fluids for the next 24-48 hours.</li>
+                <li>If you feel lightheaded, lie down and elevate your feet.</li>
+            </ul>
+        </div>
+
+        <div class="faq-item">
+            <h3><i class="fas fa-syringe"></i> 7. Can I donate blood if I have a cold or flu?</h3>
+            <p>No, you should wait until you are fully recovered and symptom-free before donating.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3><i class="fas fa-blood-drop"></i> 8. What blood types are needed the most?</h3>
+            <p>All blood types are needed, but type O-negative is especially in demand because it is the universal donor type and can be given to patients of any blood type in emergencies.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3><i class="fas fa-heartbeat"></i> 9. How is my blood used after donation?</h3>
+            <p>Your blood is tested, processed, and separated into components (red cells, plasma, platelets). It is then distributed to hospitals to help patients undergoing surgery, cancer treatment, trauma care, and more.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3><i class="fas fa-virus"></i> 10. Can I donate blood if I’ve had COVID-19?</h3>
+            <p>Yes, as long as you are fully recovered and meet all other eligibility criteria. If you received a COVID-19 vaccine, there is no deferral period for most vaccines.</p>
+        </div>
+
+    </div>
+
+    <footer class="faq-footer">
+        <p>&copy; 2025 BloodLink Hub. All rights reserved.</p>
+    </footer>
+</body>
+</html>

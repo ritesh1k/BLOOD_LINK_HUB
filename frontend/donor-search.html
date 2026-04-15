@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blood Donation - Search Donors</title>
+  <link rel="stylesheet" href="donor-search.css">
+  <link rel="stylesheet" href="main-nav.css">
+  <script defer src="main-nav.js"></script>
+</head>
+<body>
+  <div id="main-nav-root"></div>
+
+  <div class="container">
+    <h2>Search for a Blood Donor</h2>
+    <select id="blood-type">
+      <option value="">Select Blood Type</option>
+      <option value="A+">A+</option>
+      <option value="A-">A-</option>
+      <option value="B+">B+</option>
+      <option value="B-">B-</option>
+      <option value="AB+">AB+</option>
+      <option value="AB-">AB-</option>
+      <option value="O+">O+</option>
+      <option value="O-">O-</option>
+    </select>
+    <input type="number" id="age" placeholder="Enter Age" min="18">
+    <select id="gender">
+      <option value="">Select Gender</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Other">Other</option>
+    </select>
+    <input type="text" id="state" placeholder="Enter State">
+    <input type="text" id="district" placeholder="Enter District">
+    <button onclick="searchDonors()">Search Donors</button>
+  </div>
+
+  <script>
+    function searchDonors() {
+      const bloodType = document.getElementById('blood-type').value;
+      const ageRaw = document.getElementById('age').value;
+      const age = ageRaw ? Number(ageRaw) : null;
+      const gender = document.getElementById('gender').value;
+      const state = document.getElementById('state').value.trim();
+      const district = document.getElementById('district').value.trim();
+
+      if (!bloodType) {
+        alert("Please select blood type.");
+        return;
+      }
+
+      if (age !== null && (Number.isNaN(age) || age < 18)) {
+        alert("Age must be 18 or above.");
+        return;
+      }
+
+      const searchParams = { bloodType, age, gender, state, district };
+      localStorage.setItem('searchParams', JSON.stringify(searchParams));
+      window.location.href = "donor-search-results.html"; // Redirect to results page
+    }
+  </script>
+
+</body>
+</html>
+
+

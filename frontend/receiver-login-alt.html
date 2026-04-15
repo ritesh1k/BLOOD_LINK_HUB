@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receiver Login</title>
+    <style>
+        /* General Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: url('https://source.unsplash.com/1600x900/?hospital,healthcare') no-repeat center center/cover;
+            min-height: 100vh;
+            width: 100%;
+            margin: 0;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        #main-nav-root {
+            width: 100%;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            width: 350px;
+            max-width: 92%;
+            margin: 50px auto;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Heading */
+        h2 {
+            color: #d32f2f;
+            margin-bottom: 15px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Input Fields */
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            transition: 0.3s;
+            font-size: 16px;
+        }
+
+        input:focus {
+            border-color: #d32f2f;
+            box-shadow: 0 0 8px rgba(211, 47, 47, 0.5);
+        }
+
+        /* Button Styling */
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #b71c1c;
+            transform: scale(1.05);
+        }
+
+        /* Link Styling */
+        .signup-link {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .signup-link a {
+            color: #d32f2f;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 400px) {
+            .container {
+                width: 90%;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="main-nav.css">
+    <script defer src="main-nav.js"></script>
+</head>
+<body>
+    <div id="main-nav-root"></div>
+    <div class="container">
+        <h2>Receiver Login</h2>
+        <form id="receiverLoginForm">
+            <input type="email" id="receiverEmail" placeholder="Email" required>
+            <input type="password" id="receiverPassword" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <p class="signup-link"><a href="forgot-password.html?role=receiver">Forgot password?</a></p>
+        <p class="signup-link">Don't have an account? <a href="receiver_signup.html">Sign Up</a></p>
+    </div>
+
+    <script src="../api.js"></script>
+    <script>
+        function dashboardRouteByRole(role) {
+            return role === "donor" ? "donor_dashboard.html" : "receiver_dashboard.html";
+        }
+
+        function loginRouteByRole(role) {
+            return role === "donor" ? "donor_login.html" : "receiver-login-alt.html";
+        }
+
+        (function redirectIfAlreadyLoggedIn() {
+            const currentUser = JSON.parse(localStorage.getItem("currentUser") || "null");
+            const token = localStorage.getItem("token");
+            if (currentUser && token && (currentUser.role === "donor" || currentUser.role === "receiver")) {
+                window.location.replace(dashboardRouteByRole(currentUser.role));
+            }
+        })();
+
+        document.getElementById("receiverLoginForm").onsubmit = async function(event) {
+            event.preventDefault();
+
+            const email = document.getElementById("receiverEmail").value.trim().toLowerCase();
+            const password = document.getElementById("receiverPassword").value;
+
+            try {
+                const res = await loginUser({ email, password, role: "receiver" });
+                const apiUser = res.user || {};
+                const effectiveRole = apiUser.role || "receiver";
+
+                if (effectiveRole !== "receiver") {
+                    alert("This account is registered as donor. Please use donor login.");
+                    window.location.href = loginRouteByRole(effectiveRole);
+                    return;
+                }
+
+                localStorage.setItem("currentUser", JSON.stringify({
+                    id: apiUser.id || null,
+                    userId: `receiver_${apiUser.email || email}`,
+                    role: effectiveRole,
+                    name: apiUser.name || "Receiver",
+                    email: apiUser.email || email,
+                    bloodGroup: apiUser.blood_group || "",
+                    phone: apiUser.phone || "",
+                    address: ""
+                }));
+
+                alert("Login successful!");
+                window.location.href = dashboardRouteByRole(effectiveRole);
+            } catch (error) {
+                alert(error.message || "Invalid credentials.");
+            }
+        };
+    </script>
+</body>
+</html>
+
+
