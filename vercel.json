@@ -1,24 +1,4 @@
+
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "api/index.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "api/index.js"
-    }
-  ],
-  "env": {
-    "NODE_ENV": "production",
-    "CORS_ORIGIN": "@CORS_ORIGIN"
-  },
-  "functions": {
-    "api/index.js": {
-      "maxDuration": 10
-    }
-  }
+  "cleanUrls": true
 }
