@@ -1,0 +1,288 @@
+/* =========================================================================
+   HERO BACKGROUND - CSS SNIPPETS FOR BLOOD DONATION THEMES
+   
+   Copy and paste these directly into your responsive-style.css
+   Replace YOUR_IMAGE_URL with your actual image path
+   ========================================================================= */
+
+/* =========================================================================
+   OPTION 1: PROFESSIONAL RED MEDICAL THEME (Recommended)
+   ========================================================================= */
+
+.hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 3rem 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: calc(100vh - 80px);
+    
+    /* Professional red gradient with image */
+    background: 
+        linear-gradient(135deg, 
+            rgba(220, 50, 50, 0.5) 0%, 
+            rgba(150, 30, 30, 0.7) 100%),
+        url('YOUR_IMAGE_URL') center/cover no-repeat fixed;
+    
+    position: relative;
+}
+
+/* =========================================================================
+   OPTION 2: DARK MEDICAL THEME
+   ========================================================================= */
+
+/*.hero {
+    background: 
+        linear-gradient(135deg, 
+            rgba(0, 0, 0, 0.4) 0%, 
+            rgba(0, 0, 0, 0.6) 100%),
+        url('YOUR_IMAGE_URL') center/cover no-repeat fixed;
+}*/
+
+/* =========================================================================
+   OPTION 3: LIGHT OVERLAY (For bright images)
+   ========================================================================= */
+
+/*.hero {
+    background: 
+        linear-gradient(135deg, 
+            rgba(0, 0, 0, 0.2) 0%, 
+            rgba(0, 0, 0, 0.35) 100%),
+        url('YOUR_IMAGE_URL') center/cover no-repeat fixed;
+}*/
+
+/* =========================================================================
+   OPTION 4: GRADIENT ONLY (No image needed)
+   ========================================================================= */
+
+/*.hero {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 50%, #8b0000 100%);
+    background-attachment: fixed;
+}*/
+
+/* =========================================================================
+   OPTION 5: SAVING LIVES HERO WITH HEART ICON
+   ========================================================================= */
+
+/*.hero {
+    background: 
+        linear-gradient(135deg, 
+            rgba(227, 29, 35, 0.6) 0%, 
+            rgba(189, 27, 35, 0.8) 100%),
+        url('https://images.unsplash.com/photo-1576091160626-112677f00fa9?w=1920') 
+        center/cover no-repeat fixed;
+}*/
+
+/* =========================================================================
+   OVERLAY STYLING - DON'T CHANGE THIS
+   ========================================================================= */
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 1;
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    margin-bottom: 2rem;
+    line-height: 1.8;
+}
+
+.hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    position: relative;
+    z-index: 2;
+}
+
+/* =========================================================================
+   MOBILE OPTIMIZATION - DON'T CHANGE THIS
+   ========================================================================= */
+
+@media (max-width: 768px) {
+    .hero {
+        min-height: 60vh;
+        padding: 2rem 1rem;
+        background-attachment: scroll;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .hero::before {
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-content {
+        text-align: left;
+    }
+
+    .hero-title {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.95);
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+    }
+
+    .hero-buttons {
+        margin-top: 1rem;
+    }
+}
+
+/* =========================================================================
+   TABLET OPTIMIZATION
+   ========================================================================= */
+
+@media (max-width: 1024px) {
+    .hero {
+        grid-template-columns: 1fr;
+        min-height: 70vh;
+        background-attachment: fixed;
+        background-size: cover;
+        background-position: center;
+    }
+
+    .hero-image {
+        display: none;
+    }
+}
+
+/* =========================================================================
+   DESKTOP OPTIMIZATION
+   ========================================================================= */
+
+@media (min-width: 1025px) {
+    .hero {
+        grid-template-columns: 1fr;
+        min-height: calc(100vh - 80px);
+        background-attachment: fixed;
+        background-size: cover;
+        background-position: center;
+        gap: 0;
+    }
+
+    .hero::before {
+        background: rgba(0, 0, 0, 0.35);
+    }
+
+    .hero-content {
+        text-align: left;
+        max-width: 60%;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+        color: white;
+    }
+
+    .hero-image {
+        display: none;
+    }
+}
+
+/* =========================================================================
+   HELPER CLASSES - For special effects
+   ========================================================================= */
+
+/* For text with better contrast */
+.hero-text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5),
+                 4px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* For animated gradient background */
+.hero-animated {
+    background: linear-gradient(-45deg, #e74c3c, #c0392b, #8b0000, #c0392b);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* =========================================================================
+   BLOOD DONATION THEMED GRADIENTS (Ready to use)
+   ========================================================================= */
+
+/* Red Cross Inspiration */
+.hero-red-cross {
+    background: linear-gradient(135deg, #d32f2f 0%, #c62828 50%, #b71c1c 100%);
+}
+
+/* Healthcare Professional */
+.hero-healthcare {
+    background: linear-gradient(135deg, #1976d2 0%, #1565c0 50%, #0d47a1 100%);
+}
+
+/* Hope & Heart */
+.hero-hope {
+    background: linear-gradient(135deg, #f44336 0%, #e91e63 50%, #c2185b 100%);
+}
+
+/* Bright & Fresh */
+.hero-bright {
+    background: linear-gradient(135deg, #ff5722 0%, #ff7043 50%, #ff6e40 100%);
+}
+
+/* Dark Professional */
+.hero-dark {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+}
+
+/* =========================================================================
+   HOW TO USE
+   =========================================================================
+   
+   1. Find the .hero { } section in responsive-style.css (around line 271)
+   
+   2. Replace it with one of the options above:
+      - For image: Use OPTION 1 or 2
+      - For gradient only: Use OPTION 4
+      - For animated: Add class="hero-animated" to <header>
+   
+   3. Update YOUR_IMAGE_URL with your actual image file path or URL
+   
+   4. Test on mobile (F12 → Toggle device)
+   
+   5. Adjust overlay colors if needed (rgba values)
+   
+   ========================================================================= */

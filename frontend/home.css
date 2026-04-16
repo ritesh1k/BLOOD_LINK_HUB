@@ -678,8 +678,9 @@ footer {
   }
 
   .hero {
-    background-size: cover;
+    background-size: contain;
     background-position: center center;
+    background-repeat: no-repeat;
     min-height: 340px;
     margin: 0;
     padding: 0;
@@ -689,8 +690,20 @@ footer {
     box-shadow: none;
   }
 
+  .hero .overlay {
+    width: 85%;
+    height: 85%;
+    top: 7.5%;
+    left: 7.5%;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.5);
+  }
+
   .hero-content {
-    padding: 45px 12px 40px;
+    width: 90%;
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 30px 10px;
   }
 
   .hero-content h1 {

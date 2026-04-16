@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Donation Hub - Save Lives with Every Drop</title>
+    <link rel="stylesheet" href="responsive-style.css">
+</head>
+<body>
+    <!-- Navigation Bar with Hamburger Menu -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-icon">🩸</span>
+                <span class="logo-text">BloodHub</span>
+            </div>
+            
+            <!-- Hamburger Menu Toggle -->
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            
+            <!-- Navigation Links -->
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="#donate" class="nav-link">Donate</a></li>
+                <li class="nav-item"><a href="#request" class="nav-link">Request</a></li>
+                <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+                <li class="nav-item"><a href="#login" class="nav-link btn-login">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="hero-title">Every Drop Saves a Life</h1>
+            <p class="hero-subtitle">Join our community and become a lifesaver today. Blood donation drives meaningful change.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary">Start Donating</button>
+                <button class="btn btn-secondary">Learn More</button>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="placeholder-hero.svg" alt="Blood donation illustration" class="responsive-image">
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Why Donate Blood?</h2>
+            <p class="section-subtitle">Blood donation is a noble act that saves lives and helps others in need.</p>
+            
+            <div class="features-grid">
+                <!-- Feature Card 1 -->
+                <div class="feature-card">
+                    <div class="feature-icon">💚</div>
+                    <h3 class="feature-title">Save Lives</h3>
+                    <p class="feature-description">One unit of blood can save up to three lives. Your donation makes a direct impact.</p>
+                </div>
+
+                <!-- Feature Card 2 -->
+                <div class="feature-card">
+                    <div class="feature-icon">🏥</div>
+                    <h3 class="feature-title">Health Benefits</h3>
+                    <p class="feature-description">Regular blood donation can reduce heart disease risk and improve overall health.</p>
+                </div>
+
+                <!-- Feature Card 3 -->
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3 class="feature-title">Community Impact</h3>
+                    <p class="feature-description">Be part of a global movement to make blood always available when needed.</p>
+                </div>
+
+                <!-- Feature Card 4 -->
+                <div class="feature-card">
+                    <div class="feature-icon">✅</div>
+                    <h3 class="feature-title">Safety First</h3>
+                    <p class="feature-description">All donations are screened and tested to ensure safety for recipients.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donation Process Section -->
+    <section class="donation-process" id="donate">
+        <div class="container">
+            <h2 class="section-title">Donation Process</h2>
+            <p class="section-subtitle">Simple steps to make a difference</p>
+            
+            <div class="process-timeline">
+                <!-- Step 1 -->
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Register</h3>
+                    <p class="step-description">Sign up and complete your profile with health details.</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Schedule</h3>
+                    <p class="step-description">Choose a convenient date and location to donate.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Donate</h3>
+                    <p class="step-description">Visit the donation center and complete the donation process.</p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Verify</h3>
+                    <p class="step-description">Blood is tested and verified for safety and compatibility.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blood Request Section -->
+    <section class="blood-request" id="request">
+        <div class="container">
+            <h2 class="section-title">Emergency Blood Request</h2>
+            <p class="section-subtitle">Need blood urgently? We're here to help.</p>
+            
+            <div class="request-content">
+                <div class="request-form-container">
+                    <form class="request-form" id="requestForm">
+                        <div class="form-group">
+                            <label for="bloodType">Blood Type:</label>
+                            <select id="bloodType" required>
+                                <option value="">Select Blood Type</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="units">Units Needed:</label>
+                            <input type="number" id="units" min="1" max="10" value="1" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="location">Location:</label>
+                            <input type="text" id="location" placeholder="Hospital or location" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="urgency">Urgency Level:</label>
+                            <select id="urgency" required>
+                                <option value="normal">Normal</option>
+                                <option value="urgent">Urgent</option>
+                                <option value="critical">Critical</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit Request</button>
+                    </form>
+                </div>
+
+                <div class="request-info">
+                    <h3>Quick Stats</h3>
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <div class="stat-number">15K+</div>
+                            <div class="stat-label">Active Donors</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-number">50K+</div>
+                            <div class="stat-label">Lives Saved</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-number">100+</div>
+                            <div class="stat-label">Hospitals</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">About BloodHub</h2>
+            
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="placeholder-about.svg" alt="About BloodHub" class="responsive-image">
+                </div>
+
+                <div class="about-text">
+                    <h3>Our Mission</h3>
+                    <p>BloodHub is dedicated to connecting blood donors with those in need. We believe that blood donation is a fundamental act of solidarity and generosity.</p>
+                    
+                    <h3>Our Vision</h3>
+                    <p>To create a world where every patient in need has immediate access to safe blood, supported by a thriving community of voluntary donors.</p>
+                    
+                    <div class="about-features">
+                        <div class="about-feature-item">
+                            <span class="checkmark">✓</span>
+                            <span>Secure and verified donors</span>
+                        </div>
+                        <div class="about-feature-item">
+                            <span class="checkmark">✓</span>
+                            <span>Real-time blood availability</span>
+                        </div>
+                        <div class="about-feature-item">
+                            <span class="checkmark">✓</span>
+                            <span>24/7 customer support</span>
+                        </div>
+                        <div class="about-feature-item">
+                            <span class="checkmark">✓</span>
+                            <span>Network of 100+ hospitals</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What People Say</h2>
+            
+            <div class="testimonials-grid">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"BloodHub helped save my sister's life during an emergency. The process was seamless and the support team was incredibly responsive."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AK</div>
+                        <div class="author-info">
+                            <p class="author-name">Amit Kumar</p>
+                            <p class="author-role">Patient's Family</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"I've been a regular donor for 2 years. The experience is quick, safe, and I love knowing that my donation helps save lives."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">RS</div>
+                        <div class="author-info">
+                            <p class="author-name">Rajesh Singh</p>
+                            <p class="author-role">Regular Donor</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"As a hospital administrator, I appreciate how BloodHub maintains blood availability and ensures quality across our network."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">PM</div>
+                        <div class="author-info">
+                            <p class="author-name">Dr. Priya Mehta</p>
+                            <p class="author-role">Hospital Director</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta">
+        <div class="container">
+            <h2 class="cta-title">Ready to Make a Difference?</h2>
+            <p class="cta-subtitle">Join thousands of donors saving lives every day</p>
+            <div class="cta-buttons">
+                <button class="btn btn-primary" onclick="document.getElementById('requestForm').scrollIntoView({behavior: 'smooth'})">Donate Now</button>
+                <button class="btn btn-secondary">Request Blood</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Get in Touch</h2>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span class="contact-icon">📍</span>
+                        <div class="contact-details">
+                            <h4>Address</h4>
+                            <p>123 Medical Plaza, Healthcare City<br>Country</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <span class="contact-icon">📞</span>
+                        <div class="contact-details">
+                            <h4>Phone</h4>
+                            <p>+1 (800) BLOOD-911<br>Available 24/7</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <span class="contact-icon">✉️</span>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <p>support@bloodhub.com<br>info@bloodhub.com</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <span class="contact-icon">🕐</span>
+                        <div class="contact-details">
+                            <h4>Hours</h4>
+                            <p>Mon - Fri: 9AM - 6PM<br>Weekends: 10AM - 4PM</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form-container">
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <input type="text" placeholder="Your Name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="email" placeholder="Your Email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" placeholder="Subject" required>
+                        </div>
+
+                        <div class="form-group">
+                            <textarea placeholder="Your Message" rows="5" required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>BloodHub</h4>
+                    <p>Connecting donors with those in need through innovative technology and compassion.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">Facebook</a>
+                        <a href="#" class="social-link">Twitter</a>
+                        <a href="#" class="social-link">Instagram</a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#donate">Donate</a></li>
+                        <li><a href="#request">Request</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Newsletter</h4>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email" required>
+                        <button type="submit" class="btn btn-small">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 BloodHub. All rights reserved. Made with ❤️ for life.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="responsive-script.js"></script>
+</body>
+</html>
