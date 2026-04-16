@@ -1,16 +1,14 @@
-# Frontend files (not needed for serverless API)
-frontend/
-*.html
-*.css
-
 # Backend server (not needed - using serverless)
 backend/server.js
 backend/db.js
+backend/init-admin-table.js
+backend/middleware/
+backend/routes/
+backend/services/
 
 # Development files
 .git
 .github
-node_modules
 .env.local
 .env.*.local
 *.log
@@ -18,7 +16,6 @@ README*.md
 HERO_*.md
 RESPONSIVE_*.md
 VISUAL_*.md
-*.md
 
 # Database files
 database/
