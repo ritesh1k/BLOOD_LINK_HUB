@@ -8,17 +8,23 @@
   ],
   "routes": [
     {
+      "src": "/api/(.*)",
+      "dest": "api/index.js"
+    },
+    {
       "src": "/(.*)",
       "dest": "api/index.js"
     }
   ],
   "env": {
-    "NODE_ENV": "production",
-    "CORS_ORIGIN": "@CORS_ORIGIN"
+    "NODE_ENV": "production"
   },
   "functions": {
     "api/index.js": {
-      "maxDuration": 10
+      "memory": 1024,
+      "maxDuration": 30
     }
-  }
+  },
+  "buildCommand": "npm install",
+  "outputDirectory": ".next"
 } 
